@@ -29,7 +29,7 @@ SH_CLIENT_ID_HEADER = "X-SH-CLIENT-ID"
 SH_CLIENT_SECRET_HEADER = "X-SH-CLIENT-SECRET"
 
 
-@app.route("/token")
+@app.route("/token", methods=["POST"])
 def retrieve_token():
     logger.info("Retrieving token")
     try:
