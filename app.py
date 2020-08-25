@@ -31,7 +31,8 @@ SH_CLIENT_SECRET_HEADER = "X-SH-CLIENT-SECRET"
 
 @app.route("/token", methods=["POST"])
 def retrieve_token():
-    logger.info("Retrieving token")
+    origin = request.headers.get("ORIGIN")
+    logger.info("Retrieving token for %s", origin)
     try:
         sh_client_id = request.headers[SH_CLIENT_ID_HEADER]
         sh_client_secret = request.headers[SH_CLIENT_SECRET_HEADER]
@@ -47,5 +48,5 @@ def retrieve_token():
     token = session.fetch_token(
         token_url=TOKEN_URL, client_id=sh_client_id, client_secret=sh_client_secret
     )
-    logger.info("Token successfully retrieved")
+    logger.info("Token successfully retrieved for %s", origin)
     return token
